@@ -11,16 +11,16 @@
 	</parent>
 
 	<groupId>com.mthree</groupId>
-	<artifactId>guessnumber</artifactId>
+	<artifactId>Superhero</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>GuessNumber</name>
+	<name>Superhero</name>
 	<description>Demo project for Spring Boot</description>
         
 	<properties>
             <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
             <maven.compiler.source>11</maven.compiler.source>
             <maven.compiler.target>11</maven.compiler.target>
-            <start-class>com.mthree.guessnumber.App</start-class>
+            <start-class>com.mthree.superhero.App</start-class>
 	</properties>
 
 	<dependencies>

@@ -5,10 +5,45 @@
  */
 package com.mthree.superhero.data;
 
+import com.mthree.superhero.models.HeroVillain;
+import com.mthree.superhero.models.Location;
+import com.mthree.superhero.models.Organization;
+import com.mthree.superhero.models.Power;
+import com.mthree.superhero.models.Sighting;
+import java.util.List;
+
 /**
  *
  * @author Chuck
  */
 public interface SuperheroDao {
+    // Create 
+    HeroVillain createHeroVillain(HeroVillain heroVillain);
+    Location createLocation(Location location);
+    Organization createOrganization(Organization organization);
+    Power createPower(Power power);
+    Sighting createSighting(Sighting sighting);
+    
+    // Edit
+    HeroVillain editHeroVillain(HeroVillain heroVillain, int id);
+    Location editLocation(Location location, int id);
+    Organization editOrganization(Organization organization, int id);
+    Power editPower(Power power, int id);
+    Sighting editSighting(Sighting sighting, int id);    
+
+    // Delete
+    HeroVillain deleteHeroVillain(int id);
+    Location deleteLocation(int id);
+    Organization deleteOrganization(int id);
+    Power deletePower(int id);
+    Sighting deleteSighting(int id); 
+    
+    // Getters
+    HeroVillain getHeroVillain(int id);
+    Location getLocation(int id);
+    Organization getOrganization(int id);
+    Power getPower(int id);
+    Sighting getSighting(int id); 
+    List<HeroVillain> getAllHerosAndVillains();
     
 }

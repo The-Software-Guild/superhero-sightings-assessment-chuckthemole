@@ -5,6 +5,8 @@
  */
 package com.mthree.superhero.models;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author Chuck
@@ -13,6 +15,7 @@ public class Sighting {
     private int id;
     private Location location;
     private HeroVillain heroVillain;
+    private LocalDate date;
     
     public Sighting() {}
     
@@ -35,6 +38,14 @@ public class Sighting {
     
     public void setHeroVillain(HeroVillain heroVillain) {
         this.heroVillain = heroVillain;
+    }
+    
+    public LocalDate getDate() {
+        return this.date;
+    }
+    
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
     
     @Override
