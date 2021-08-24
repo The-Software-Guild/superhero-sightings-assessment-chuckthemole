@@ -11,7 +11,7 @@
 	<groupId>com.mthree</groupId>
 	<artifactId>superhero</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>superhero</name>
+	<name>Superhero</name>
 	<description>Super Hero Sightings</description>
 	<properties>
 		<java.version>11</java.version>
