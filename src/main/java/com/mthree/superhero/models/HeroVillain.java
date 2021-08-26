@@ -5,6 +5,7 @@
  */
 package com.mthree.superhero.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ public class HeroVillain {
     private String name;
     private List<Power> powers;
     
-    public HeroVillain() {}
+    public HeroVillain() {powers = new ArrayList<>();}
     
     public HeroVillain(boolean isHero, String name, List<Power> powers) {
         this.isHero = isHero;

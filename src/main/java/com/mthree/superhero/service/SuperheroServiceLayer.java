@@ -19,11 +19,20 @@ import java.util.List;
 public interface SuperheroServiceLayer {
     // Create 
     HeroVillain createHeroVillain(boolean isHero, String name);
-    Location createLocation(double longitude, double latitude);
+    Location createLocation(Double latitude, Double longitude);
     Organization createOrganization(boolean isForHero, String name);
     Power createPower(String name, String description);
     Sighting createSighting(Location location, HeroVillain heroVillain);
     
     // Getters
-    List<HeroVillain> getAllherosAndVillains();
+    HeroVillain getHeroVillain(int id);
+    Location getLocation(int id);
+    Organization getOrganization(int id);
+    Power getPower(int id);
+    Sighting getSighting(int id); 
+    List<HeroVillain> getAllHerosAndVillains();
+    List<Location> getAllLocations();
+    List<Organization> getAllOrganizations();
+    List<Power> getAllPowers();
+    List<Sighting> getAllSightings();
 }

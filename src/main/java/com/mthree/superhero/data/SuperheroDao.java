@@ -45,5 +45,8 @@ public interface SuperheroDao {
     Power getPower(int id);
     Sighting getSighting(int id); 
     List<HeroVillain> getAllHerosAndVillains();
-    
+    List<Location> getAllLocations();
+    List<Organization> getAllOrganizations();
+    List<Power> getAllPowers();
+    List<Sighting> getAllSightings();
 }

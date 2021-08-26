@@ -20,11 +20,20 @@ public class Organization {
     private String name;
     private Map<String, HeroVillain> herosAndVillains;
     
-    public Organization() {}
+    public Organization() {herosAndVillains = new HashMap<>();}
     
     public Organization(boolean isForHero, String name) {
+        herosAndVillains = new HashMap<>();
         this.isForHero = isForHero;
         this.name = name;
+    }
+    
+    public int getId() {
+        return this.id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
     }
     
     public boolean getIsForHero() {
@@ -41,6 +50,10 @@ public class Organization {
     
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public void addHeroVillain(HeroVillain heroVillain) {
+        herosAndVillains.put(heroVillain.getName(), heroVillain);
     }
     
     public List<HeroVillain> getHerosAndVillains() {

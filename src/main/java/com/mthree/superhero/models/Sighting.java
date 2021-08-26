@@ -6,6 +6,7 @@
 package com.mthree.superhero.models;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  *
@@ -16,12 +17,23 @@ public class Sighting {
     private Location location;
     private HeroVillain heroVillain;
     private LocalDate date;
+    private LocalTime time;
     
     public Sighting() {}
     
     public Sighting(Location location, HeroVillain heroVillain) {
         this.location = location;
         this.heroVillain = heroVillain;
+        this.date = LocalDate.now();
+        this.time = LocalTime.now();
+    }
+    
+    public int getId() {
+        return this.id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
     }
     
     public Location getLocation() {

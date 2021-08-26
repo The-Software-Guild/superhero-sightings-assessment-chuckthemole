@@ -16,12 +16,20 @@ public class Location {
     
     public Location() {}
     
-    public Location(double longitude, double latitude) {
+    public Location(Double latitude, Double longitude) {
         this.longitude = longitude;
         this.latitude = latitude;
     }
     
-    public double getLongitude() {
+    public int getId() {
+        return this.id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public Double getLongitude() {
         return this.longitude;
     }
     
@@ -29,7 +37,7 @@ public class Location {
         this.longitude = longitude;
     }
     
-    public double getLatitude() {
+    public Double getLatitude() {
         return this.latitude;
     }
     
