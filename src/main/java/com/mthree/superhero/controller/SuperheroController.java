@@ -12,9 +12,6 @@ import com.mthree.superhero.models.Power;
 import com.mthree.superhero.models.Sighting;
 import com.mthree.superhero.service.SuperheroServiceLayer;
 import com.mthree.superhero.ui.SuperheroView;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,11 +20,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
@@ -43,37 +37,6 @@ public class SuperheroController {
     public SuperheroController(SuperheroServiceLayer service, SuperheroView view) {
         this.service = service;
         this.view = view;
-    }
-    
-    public void run() {        
-        boolean keepGoing = true;
-        
-        while (keepGoing) {
-            int menuSelection = getMenuSelection();
-
-            switch(menuSelection) {
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    keepGoing = false;
-                    break;
-                default:
-                    unknownCommand();
-                    break;
-            }
-                    
-        }
-        
-        exitMessage();
-        System.exit(0);
-    }
-    
-    private int getMenuSelection() {
-        return view.printMenuAndGetSelection();
     }
     
     @GetMapping("/")
@@ -231,13 +194,5 @@ public class SuperheroController {
     private void playGame(int number) {
         int guess = view.getGuessForGame();
     }
-    
-    private void unknownCommand() {
-        view.displayUnknownCommandBanner();
-    }
-    
-    private void exitMessage() {
-        view.displayExitBanner();
-    } 
 }
 

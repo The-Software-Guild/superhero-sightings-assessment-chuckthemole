@@ -12,20 +12,15 @@ import com.mthree.superhero.models.Power;
 import com.mthree.superhero.models.Sighting;
 import com.mthree.superhero.service.SuperheroServiceLayer;
 import com.mthree.superhero.ui.SuperheroView;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,46 +40,15 @@ public class SuperheroControllerRestAPI {
         this.view = view;
     }
     
-    public void run() {        
-        boolean keepGoing = true;
-        
-        while (keepGoing) {
-            int menuSelection = getMenuSelection();
-
-            switch(menuSelection) {
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    keepGoing = false;
-                    break;
-                default:
-                    unknownCommand();
-                    break;
-            }
-                    
-        }
-        
-        exitMessage();
-        System.exit(0);
-    }
-    
-    private int getMenuSelection() {
-        return view.printMenuAndGetSelection();
-    }
-    
     @GetMapping("/")
     public String index() {
         return "index";
     }
     
     // @RequestBody Round round sending as JSON to hide url
-    @PostMapping("/createHeroVillain")
+    @PostMapping("/createSuper")
     @ResponseStatus(HttpStatus.CREATED)
-    private ResponseEntity<HeroVillain> createHeroVillain(HeroVillain hv, HttpServletRequest request) {
+    private ResponseEntity<HeroVillain> createHeroVillain(HttpServletRequest request) {
         String isHeroString = request.getParameter("isHero");
         boolean isHeroBoolean = false;
         if (!isHeroString.equals("false")) {
@@ -146,46 +110,31 @@ public class SuperheroControllerRestAPI {
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(sighting);
-    }
-    
-    @GetMapping("/herosAndVillains")
-    private String getHerosAndVillains(Model model) {
-        model.addAttribute("heroesAndVillains", service.getAllHerosAndVillains());
-        return "heroVillain/heroesAndVillains";
-    }  
+    } 
     
     @GetMapping("/getHerosAndVillains")
     private List<HeroVillain> getHerosAndVillains() {
         return service.getAllHerosAndVillains();
     } 
     
-    @GetMapping("/locations")
-    private String getLocations(Model model) {
-        model.addAttribute("locations", service.getAllLocations());
-        return "location/locations";
-    }
-    
     @GetMapping("/getLocations")
     private List<Location> getLocations() {
         return service.getAllLocations();
     }
     
-    @GetMapping("/organizations")
-    private String getOrganizations(Model model) {
-        model.addAttribute("organizations", service.getAllOrganizations());
-        return "organization/organizations";
+    @GetMapping("/getOrganizations")
+    private List<Organization> getOrganizations() {
+        return service.getAllOrganizations();
     }
     
-    @GetMapping("/powers")
-    private String getPowers(Model model) {
-        model.addAttribute("powers", service.getAllPowers());
-        return "power/powers";
+    @GetMapping("/getPowers")
+    private List<Power> getPowers() {
+        return service.getAllPowers();
     }
     
-    @GetMapping("/sightings")
-    private String getSightings(Model model) {
-        model.addAttribute("sightings", service.getAllSightings());
-        return "sighting/sightings";
+    @GetMapping("/getSightings")
+    private List<Sighting> getSightings(Model model) {
+        return service.getAllSightings();
     }
     
     @GetMapping("/heroVillain/{id}")
@@ -241,13 +190,5 @@ public class SuperheroControllerRestAPI {
     private void playGame(int number) {
         int guess = view.getGuessForGame();
     }
-    
-    private void unknownCommand() {
-        view.displayUnknownCommandBanner();
-    }
-    
-    private void exitMessage() {
-        view.displayExitBanner();
-    } 
 }
 
