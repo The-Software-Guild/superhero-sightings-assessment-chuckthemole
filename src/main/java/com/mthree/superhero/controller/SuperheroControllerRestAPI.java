@@ -34,13 +34,13 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Chuck
  */
 
-@Controller
-@RequestMapping("/superhero")
-public class SuperheroController {
+@RestController
+@RequestMapping("/api/superhero")
+public class SuperheroControllerRestAPI {
     private SuperheroView view;
     private SuperheroServiceLayer service;
 
-    public SuperheroController(SuperheroServiceLayer service, SuperheroView view) {
+    public SuperheroControllerRestAPI(SuperheroServiceLayer service, SuperheroView view) {
         this.service = service;
         this.view = view;
     }
@@ -154,10 +154,20 @@ public class SuperheroController {
         return "heroVillain/heroesAndVillains";
     }  
     
+    @GetMapping("/getHerosAndVillains")
+    private List<HeroVillain> getHerosAndVillains() {
+        return service.getAllHerosAndVillains();
+    } 
+    
     @GetMapping("/locations")
     private String getLocations(Model model) {
         model.addAttribute("locations", service.getAllLocations());
         return "location/locations";
+    }
+    
+    @GetMapping("/getLocations")
+    private List<Location> getLocations() {
+        return service.getAllLocations();
     }
     
     @GetMapping("/organizations")
