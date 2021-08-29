@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,7 +46,7 @@ public class SuperheroController {
     }
     
     // @RequestBody Round round sending as JSON to hide url
-    @PostMapping("/createHeroVillain")
+    @PostMapping("/addHeroVillain")
     @ResponseStatus(HttpStatus.CREATED)
     private ResponseEntity<HeroVillain> createHeroVillain(HeroVillain hv, HttpServletRequest request) {
         String isHeroString = request.getParameter("isHero");
@@ -63,6 +64,21 @@ public class SuperheroController {
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(heroVillain);
+    }
+    
+    @GetMapping("/createHeroVillain")
+    private String createHeroVillain(Model model) {
+        model.addAttribute("heroVillain", new HeroVillain());
+        model.addAttribute("heroesVillains", service.getAllHerosAndVillains());
+        return "/heroVillain/createHeroVillain";
+    }
+    
+    @PostMapping("/createHeroVillain")
+    public String createHeroVillainSubmitForm(@ModelAttribute("heroVillain") HeroVillain heroVillain) {
+        // System.out.println(heroVillain.getName());
+        // System.out.println(heroVillain.getIsHero());
+        service.createHeroVillain(heroVillain.getIsHero(), heroVillain.getName());
+        return "/superhero/herosAndVillains";
     }
     
     @PostMapping("/createLocation")

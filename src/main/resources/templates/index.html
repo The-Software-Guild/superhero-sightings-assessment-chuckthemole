@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <title>Course Manager</title>
+    <title>Superhero</title>
   </head>
   <body>
     <!-- Main Body of Page -->
@@ -22,20 +22,51 @@
         
         <div class="row m-4 border border-dark">
             <p class="col">
+                <a class="btn btn-primary m-3" data-toggle="collapse" href="#createCollapse" role="button" aria-expanded="false" aria-controls="createCollapse">
+                    Create
+                </a>
+            </p>
+        </div>
+        
+        <div class="collapse" id="createCollapse">
+            <div class="card card-body">
+        
+                <div class="row m-4 border border-dark">
+                    <div class="col text-center m-3">
+                        <a href="/superhero/createHeroVillain" class="btn btn-outline-primary btn-lg">Heroes/Villains</a>
+                    </div>
+                    <div class="col text-center m-3">
+                        <a id="locations_create_btn" class="btn btn-outline-primary btn-lg">Locations</a>
+                    </div>
+                    <div class="col text-center m-3">
+                        <a id="organizations_btn" class="btn btn-outline-primary btn-lg">Organizations</a>
+                    </div>
+                    <div class="col text-center m-3">
+                        <a id="powers_create_btn" class="btn btn-outline-primary btn-lg">Powers</a>
+                    </div>
+                    <div class="col text-center m-3">
+                        <a id="sightings_create_btn" class="btn btn-outline-primary btn-lg">Sightings</a>
+                    </div>
+                </div>
+                
+                <div class="container">
+                    <div id="createBanner"></div>
+                    <div id="create"></div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="row m-4 border border-dark">
+            <p class="col">
                 <a class="btn btn-primary m-3" data-toggle="collapse" href="#displayCollapse" role="button" aria-expanded="false" aria-controls="displayCollapse">
-                    Display Buttons
+                    Display
                 </a>
             </p>
         </div>
         
         <div class="collapse" id="displayCollapse">
             <div class="card card-body">
-                
-                <div class="row m-4">
-                    <div class="col text-center border border-dark">
-                        <h1>Display Buttons</h1>
-                    </div>
-                </div>
         
                 <div class="row m-4 border border-dark">
                     <div class="col text-center m-3">
