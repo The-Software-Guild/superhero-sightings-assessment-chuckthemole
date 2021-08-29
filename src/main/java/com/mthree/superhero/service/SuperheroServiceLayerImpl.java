@@ -172,4 +172,9 @@ public class SuperheroServiceLayerImpl implements SuperheroServiceLayer {
                 powerHash.put(power.getName(), power);
         });
     }
+
+    @Override
+    public boolean deleteHeroVillain(int id) {
+        return dao.deleteHeroVillain(id);
+    }
 }

@@ -88,8 +88,12 @@ public class SuperheroController {
     }
     
     @PostMapping("/deleteHeroVillain/{id}")
-    private String deleteHeroVillain(@PathVariable int id) {
-        HeroVillain heroVillain = service.getHeroVillain(id);
+    private String deleteHeroVillain(@PathVariable int id, Model model) {
+        HeroVillain heroVillain = new HeroVillain();
+        heroVillain.setIsHero(service.getHeroVillain(id).getIsHero());
+        heroVillain.setName(service.getHeroVillain(id).getName());
+        model.addAttribute("heroVillain", heroVillain);
+        service.deleteHeroVillain(id);
         return "heroVillain/deleteHeroVillainSuccess";
     }
     

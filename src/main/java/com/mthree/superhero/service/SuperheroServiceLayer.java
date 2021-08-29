@@ -24,6 +24,9 @@ public interface SuperheroServiceLayer {
     Power createPower(String name, String description);
     Sighting createSighting(Location location, HeroVillain heroVillain);
     
+    // Delete
+    boolean deleteHeroVillain(int id);
+    
     // Getters
     HeroVillain getHeroVillain(int id);
     Location getLocation(int id);

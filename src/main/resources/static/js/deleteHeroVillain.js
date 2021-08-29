@@ -13,10 +13,9 @@ $(document).ready(function(e){
 
             $.each(array, function(index, heroVillain) {
                 var superInfo = '<p>';
-                superInfo += 'ID: ' + heroVillain.id + '<br>';
                 superInfo += 'Name: ' + heroVillain.name + '<br>';
                 superInfo += 'Is Hero: ' + heroVillain.isHero + '<br>';
-                superInfo += '<form method="POST" action="' + heroVillain.id + '" th:action="@{/superhero/deleteHeroVillain/}" th:object="${heroVillain}">';
+                superInfo += '<form method="POST" action="/superhero/deleteHeroVillain/' + heroVillain.id + '" th:action="@{/superhero/deleteHeroVillain/}" th:object="${heroVillain}">';
                 superInfo += '<button type="submit" name="submit" value="value" class="btn btn-danger">Delete</button><br></form>';
                 superInfo += '</p><hr>';
                 

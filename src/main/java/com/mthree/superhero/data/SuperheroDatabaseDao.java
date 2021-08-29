@@ -178,8 +178,9 @@ public class SuperheroDatabaseDao implements SuperheroDao {
     }
 
     @Override
-    public HeroVillain deleteHeroVillain(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean deleteHeroVillain(int id) {
+        final String sql = "DELETE FROM heroVillain WHERE heroVillain_id = ?;";
+        return jdbcTemplate.update(sql, id) > 0;
     }
 
     @Override
