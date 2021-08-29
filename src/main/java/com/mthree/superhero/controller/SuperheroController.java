@@ -78,7 +78,7 @@ public class SuperheroController {
         // System.out.println(heroVillain.getName());
         // System.out.println(heroVillain.getIsHero());
         service.createHeroVillain(heroVillain.getIsHero(), heroVillain.getName());
-        return "/superhero/herosAndVillains";
+        return "/heroVillain/createHeroVillainSuccess";
     }
     
     @PostMapping("/createLocation")

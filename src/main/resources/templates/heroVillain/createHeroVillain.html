@@ -12,6 +12,7 @@
   </head>
   <body>
     <!-- Main Body of Page -->
+    <div th:insert="fragments/header :: header"></div>
     
     <div class="container">
         <div class="row m-4">
@@ -20,7 +21,7 @@
             </div>
         </div>
         
-        <form action="#" th:action="@{/heroVillain/createHeroVillainSuccess}" method="post" th:object="${heroVillain}">
+        <form action="#" th:action="@{/superhero/createHeroVillain}" method="post" th:object="${heroVillain}">
             <label>Full name:</label>
             <input type="text" th:field="*{name}" /><br/>
             
