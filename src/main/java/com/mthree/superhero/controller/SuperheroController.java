@@ -97,6 +97,24 @@ public class SuperheroController {
         return "heroVillain/deleteHeroVillainSuccess";
     }
     
+    @GetMapping("/editHeroVillainList")
+    private String editHeroVillain(Model model) {
+        model.addAttribute("heroesVillains", service.getAllHerosAndVillains());
+        return "/heroVillain/editHeroVillainList";
+    }
+    
+    @GetMapping("/editHeroVillain/{id}")
+    private String editHeroVillain(@PathVariable int id, Model model) {
+        model.addAttribute("heroVillain", service.getHeroVillain(id));
+        return "/heroVillain/editHeroVillain";
+    }
+    
+    @PostMapping("/editHeroVillain")
+    private String editHeroVillain(@ModelAttribute("heroVillain") HeroVillain heroVillain) {
+        service.editHeroVillain(heroVillain);
+        return "/heroVillain/editHeroVillainSuccess";
+    }
+    
     @PostMapping("/createLocation")
     @ResponseStatus(HttpStatus.CREATED)
     private ResponseEntity<Location> createLocation(Double latitude, Double longitude) {
