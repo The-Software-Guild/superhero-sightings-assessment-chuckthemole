@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -278,7 +279,7 @@ public class SuperheroDatabaseDao implements SuperheroDao {
         final String sql = 
                 "SELECT * FROM sighting WHERE sighting_id = ?;";
         Sighting sighting = jdbcTemplate.queryForObject(sql, new SightingMapper(), id);
-        
+        /*
         String sqlHeroVillain = "SELECT heroVillain_id FROM sighting WHERE sighting_id = ?;";
         int heroVillainId = jdbcTemplate.queryForObject(sqlHeroVillain, Integer.class);
         sighting.setHeroVillain(getHeroVillain(heroVillainId));
@@ -286,7 +287,7 @@ public class SuperheroDatabaseDao implements SuperheroDao {
         String sqlLocation = "SELECT location_id FROM sighting WHERE sighting_id = ?;";
         int locationId = jdbcTemplate.queryForObject(sqlLocation, Integer.class);
         sighting.setLocation(getLocation(locationId));
-        
+        */
         return sighting;
     }
 
@@ -436,6 +437,52 @@ public class SuperheroDatabaseDao implements SuperheroDao {
         });
         
         return heroesVillains;
+    }
+    
+     @Override
+    public Sighting addSighting(int locationId, int heroVillainId) {        
+        Sighting sighting = new Sighting(getLocation(locationId), getHeroVillain(heroVillainId));
+        final String sql = "INSERT INTO sighting(heroVillain_id, location_id, sightingDate) VALUES(?, ?, ?);";
+        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+
+        jdbcTemplate.update((Connection conn) -> {
+
+            PreparedStatement statement = conn.prepareStatement(
+                sql, 
+                Statement.RETURN_GENERATED_KEYS);
+            
+            statement.setInt(1, heroVillainId);
+            statement.setInt(2, locationId);
+            statement.setDate(3, Date.valueOf(LocalDate.now()));
+            return statement;
+
+        }, keyHolder);
+        
+        sighting.setId(keyHolder.getKey().intValue());
+
+        return sighting;
+        
+    }
+
+    @Override
+    public List<Sighting> getSightings(int heroVillainId) {
+        final String sql = "SELECT location_id FROM sighting WHERE heroVillain_id = ?";
+        List<Integer> location_ids = 
+                jdbcTemplate.queryForList(sql, Integer.class);
+        
+        List<Location> locations = new ArrayList<>();
+        location_ids.forEach(location_id -> {
+            String sqlLocation = "SELECT * FROM location WHERE location_id = ?;";
+            Location location = jdbcTemplate.queryForObject(sqlLocation, new LocationMapper());
+            locations.add(location);
+        });
+        
+        List<Sighting> sightings = new ArrayList<>();
+        locations.forEach(location -> {
+            sightings.add(new Sighting(location, getHeroVillain(heroVillainId)));
+        });
+        
+        return sightings;
     }
     
     private static final class HeroVillainMapper 

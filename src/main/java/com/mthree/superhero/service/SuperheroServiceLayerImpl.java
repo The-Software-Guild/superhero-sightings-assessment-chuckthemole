@@ -243,4 +243,14 @@ public class SuperheroServiceLayerImpl implements SuperheroServiceLayer {
     public boolean addToOrganization(int organizationId, int heroVillainId) {
         return dao.addToOrganization(organizationId, heroVillainId);
     }
+
+    @Override
+    public Sighting addSighting(int locationId, int heroVillainId) {
+        return dao.addSighting(locationId, heroVillainId);
+    }
+
+    @Override
+    public List<Sighting> getSightings(int heroVillainId) {
+        return dao.getSightings(heroVillainId);
+    }
 }
