@@ -187,4 +187,39 @@ public class SuperheroServiceLayerImpl implements SuperheroServiceLayer {
     public boolean deleteLocation(int id) {
         return dao.deleteLocation(id);
     }
+
+    @Override
+    public Location editLocation(Location location) {
+        return dao.editLocation(location, location.getId());
+    }
+
+    @Override
+    public boolean deleteOrganization(int id) {
+        return dao.deleteOrganization(id);
+    }
+
+    @Override
+    public boolean deletePower(int id) {
+        return dao.deletePower(id);
+    }
+
+    @Override
+    public boolean deleteSighting(int id) {
+        return dao.deleteSighting(id);
+    }
+
+    @Override
+    public Organization editOrganization(Organization organization) {
+        return dao.editOrganization(organization, organization.getId());
+    }
+
+    @Override
+    public Power editPower(Power power) {
+        return dao.editPower(power, power.getId());
+    }
+
+    @Override
+    public Sighting editSighting(Sighting sighting) {
+        return dao.editSighting(sighting, sighting.getId());
+    }
 }

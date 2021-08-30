@@ -162,12 +162,18 @@ public class SuperheroDatabaseDao implements SuperheroDao {
 
     @Override
     public Location editLocation(Location location, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        final String sql = "UPDATE location SET latitude = ?, longitude = ? WHERE location_id = ?";
+
+        jdbcTemplate.update(sql, location.getLatitude(), location.getLongitude(), id);
+        return location; 
     }
 
     @Override
     public Organization editOrganization(Organization organization, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        final String sql = "UPDATE organizationHeroVillain SET organizationName = ?, isForHero = ? WHERE organization_id = ?";
+
+        jdbcTemplate.update(sql, organization.getName(), organization.getIsForHero(), id);
+        return organization;
     }
 
     @Override
@@ -194,18 +200,21 @@ public class SuperheroDatabaseDao implements SuperheroDao {
     }
 
     @Override
-    public Organization deleteOrganization(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean deleteOrganization(int id) {
+        final String sql = "DELETE FROM organizationHeroVillain WHERE organization_id = ?;";
+        return jdbcTemplate.update(sql, id) > 0;
     }
 
     @Override
-    public Power deletePower(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean deletePower(int id) {
+        final String sql = "DELETE FROM power WHERE power_id = ?;";
+        return jdbcTemplate.update(sql, id) > 0;
     }
 
     @Override
-    public Sighting deleteSighting(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean deleteSighting(int id) {
+        final String sql = "DELETE FROM sighting WHERE sighting_id = ?;";
+        return jdbcTemplate.update(sql, id) > 0;
     }
 
     @Override

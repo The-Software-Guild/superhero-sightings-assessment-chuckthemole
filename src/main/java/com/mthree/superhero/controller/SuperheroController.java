@@ -144,6 +144,25 @@ public class SuperheroController {
         return "location/deleteLocationSuccess";
     }
     
+    @GetMapping("/editLocation")
+    private String editLocation(Model model) {
+        model.addAttribute("locations", service.getAllLocations());
+        return "/location/editLocationList";
+    }
+    
+    @GetMapping("/editLocation/{id}")
+    private String editLocation(@PathVariable int id, Model model) {
+        model.addAttribute("location", service.getLocation(id));
+        model.addAttribute("editLocation", new HeroVillain());
+        return "/location/editLocation";
+    }
+    
+    @PostMapping("/editLocation")
+    private String editLocation(@ModelAttribute("location") Location location) {
+        service.editLocation(location);
+        return "/location/editLocationSuccess";
+    }
+    
     @PostMapping("/createLoc")
     @ResponseStatus(HttpStatus.CREATED)
     private ResponseEntity<Location> createLocation(Double latitude, Double longitude) {
@@ -155,7 +174,7 @@ public class SuperheroController {
         return ResponseEntity.ok(location);
     }
     
-    @PostMapping("/createOrganization")
+    @PostMapping("/createOrg")
     @ResponseStatus(HttpStatus.CREATED)
     private ResponseEntity<Organization> createOrganization(boolean isForHero, String name) {
         Organization organization = service.createOrganization(isForHero, name);
@@ -164,6 +183,53 @@ public class SuperheroController {
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(organization);
+    }
+    
+    @GetMapping("/createOrganization")
+    private String createOrganization(Model model) {
+        model.addAttribute("organization", new Organization());
+        return "/organization/createOrganization";
+    }
+    
+    @PostMapping("/createOrganization")
+    public String createOrganization(@ModelAttribute("organization") Organization organization) {
+        service.createOrganization(organization.getIsForHero(), organization.getName());
+        return "/organization/createOrganizationSuccess";
+    }
+    
+    @GetMapping("/deleteOrganization")
+    private String deleteOrganization(Model model) {
+        model.addAttribute("organization", service.getAllOrganizations());
+        return "/organization/deleteOrganization";
+    }
+    
+    @PostMapping("/deleteOrganization/{id}")
+    private String deleteOrganization(@PathVariable int id, Model model) {
+        Organization organization = new Organization();
+        organization.setIsForHero(service.getOrganization(id).getIsForHero());
+        organization.setName(service.getOrganization(id).getName());
+        model.addAttribute("organization", organization);
+        service.deleteOrganization(id);
+        return "organization/deleteOrganizationSuccess";
+    }
+    
+    @GetMapping("/editOrganization")
+    private String editOrganization(Model model) {
+        model.addAttribute("organizations", service.getAllOrganizations());
+        return "/organization/editOrganizationList";
+    }
+    
+    @GetMapping("/editOrganization/{id}")
+    private String editOrganization(@PathVariable int id, Model model) {
+        model.addAttribute("organization", service.getOrganization(id));
+        model.addAttribute("editOrganization", new Organization());
+        return "/organization/editOrganization";
+    }
+    
+    @PostMapping("/editOrganization")
+    private String editOrganization(@ModelAttribute("organization") Organization organization) {
+        service.editOrganization(organization);
+        return "/organization/editOrganizationSuccess";
     }
     
     @PostMapping("/createPower")

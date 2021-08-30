@@ -27,9 +27,16 @@ public interface SuperheroServiceLayer {
     // Delete
     boolean deleteHeroVillain(int id);
     boolean deleteLocation(int id);
+    boolean deleteOrganization(int id);
+    boolean deletePower(int id);
+    boolean deleteSighting(int id);
     
     // Edit
     HeroVillain editHeroVillain(HeroVillain heroVillain);
+    Location editLocation(Location location);
+    Organization editOrganization(Organization organization);
+    Power editPower(Power power);
+    Sighting editSighting(Sighting sighting);
     
     // Getters
     HeroVillain getHeroVillain(int id);
