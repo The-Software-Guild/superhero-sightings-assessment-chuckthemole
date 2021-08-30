@@ -110,15 +110,41 @@ public class SuperheroController {
         return "/heroVillain/editHeroVillain";
     }
     
-    @PostMapping("/editHeroVillain/")
-    private String editHeroVillain(
-            @ModelAttribute("heroVillain") HeroVillain heroVillain) {
-        System.out.println("************************" + heroVillain.getId());
+    @PostMapping("/editHeroVillain")
+    private String editHeroVillain(@ModelAttribute("heroVillain") HeroVillain heroVillain) {
         service.editHeroVillain(heroVillain);
         return "/heroVillain/editHeroVillainSuccess";
     }
     
+    @GetMapping("/createLocation")
+    private String createLocation(Model model) {
+        model.addAttribute("location", new Location());
+        return "/location/createLocation";
+    }
+    
     @PostMapping("/createLocation")
+    public String createLocation(@ModelAttribute("location") Location location) {
+        service.createLocation(location.getLatitude(), location.getLongitude());
+        return "/location/createLocationSuccess";
+    }
+    
+        @GetMapping("/deleteLocation")
+    private String deleteLocation(Model model) {
+        model.addAttribute("locations", service.getAllLocations());
+        return "/location/deleteLocation";
+    }
+    
+    @PostMapping("/deleteLocation/{id}")
+    private String deleteLocation(@PathVariable int id, Model model) {
+        Location location = new Location();
+        location.setLatitude(service.getLocation(id).getLatitude());
+        location.setLongitude(service.getLocation(id).getLongitude());
+        model.addAttribute("location", location);
+        service.deleteLocation(id);
+        return "location/deleteLocationSuccess";
+    }
+    
+    @PostMapping("/createLoc")
     @ResponseStatus(HttpStatus.CREATED)
     private ResponseEntity<Location> createLocation(Double latitude, Double longitude) {
         Location location = service.createLocation(latitude, longitude);

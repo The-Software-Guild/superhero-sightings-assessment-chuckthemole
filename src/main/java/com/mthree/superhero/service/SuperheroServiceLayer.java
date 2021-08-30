@@ -26,6 +26,7 @@ public interface SuperheroServiceLayer {
     
     // Delete
     boolean deleteHeroVillain(int id);
+    boolean deleteLocation(int id);
     
     // Edit
     HeroVillain editHeroVillain(HeroVillain heroVillain);

@@ -182,4 +182,9 @@ public class SuperheroServiceLayerImpl implements SuperheroServiceLayer {
     public HeroVillain editHeroVillain(HeroVillain heroVillain) {
         return dao.editHeroVillain(heroVillain, heroVillain.getId());
     }
+
+    @Override
+    public boolean deleteLocation(int id) {
+        return dao.deleteLocation(id);
+    }
 }

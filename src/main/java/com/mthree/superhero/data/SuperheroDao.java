@@ -33,7 +33,7 @@ public interface SuperheroDao {
 
     // Delete
     boolean deleteHeroVillain(int id);
-    Location deleteLocation(int id);
+    boolean deleteLocation(int id);
     Organization deleteOrganization(int id);
     Power deletePower(int id);
     Sighting deleteSighting(int id); 

@@ -154,14 +154,10 @@ public class SuperheroDatabaseDao implements SuperheroDao {
 
     @Override
     public HeroVillain editHeroVillain(HeroVillain heroVillain, int id) {
-        final String sql = "UPDATE heroVillain SET "
-                + "heroVillainName = ?, "
-                + "isHero = ?, "
-                + "WHERE heroVillain_id = ?;";
+        final String sql = "UPDATE heroVillain SET heroVillainName = ?, isHero = ? WHERE heroVillain_id = ?";
 
         jdbcTemplate.update(sql, heroVillain.getName(), heroVillain.getIsHero(), id);
-        return heroVillain;
-        
+        return heroVillain; 
     }
 
     @Override
@@ -192,8 +188,9 @@ public class SuperheroDatabaseDao implements SuperheroDao {
     }
 
     @Override
-    public Location deleteLocation(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean deleteLocation(int id) {
+        final String sql = "DELETE FROM location WHERE location_id = ?;";
+        return jdbcTemplate.update(sql, id) > 0;
     }
 
     @Override
