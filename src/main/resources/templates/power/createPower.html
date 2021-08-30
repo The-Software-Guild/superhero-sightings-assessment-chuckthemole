@@ -17,17 +17,16 @@
     <div class="container">
         <div class="row m-4">
             <div class="col text-center border border-dark">
-                <h1>Create Organization</h1>
+                <h1>Create Power</h1>
             </div>
         </div>
         
-        <form action="#" th:action="@{/superhero/createOrganization}" method="post" th:object="${organization}">
+        <form action="#" th:action="@{/superhero/createPower}" method="post" th:object="${power}">
             <label>Name:</label>
             <input type="text" th:field="*{name}" /><br/>
-            
-            <label>Is for Hero/Villain</label>
-            <input type="radio" th:field="*{isForHero}" value="true" />For Hero
-            <input type="radio" th:field="*{isForHero}" value="false" />For Villain<br/>
+           
+            <label>Description:</label>
+            <input type="text" th:field="*{description}" /><br/>
             
             <button type="submit">Create</button> 
         </form>

@@ -58,8 +58,13 @@ public class HeroVillain {
         this.powers = powers;
     }
     
+    public void addPower(Power power) {
+        this.powers.add(power);
+    }
+    
     @Override
     public boolean equals(Object o) {
         return this.id == ((HeroVillain) o).id;
     }
+    
 }

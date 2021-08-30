@@ -17,14 +17,15 @@
     <div class="container">
         <div class="row m-4">
             <div class="col text-center border border-dark">
-                <h1>Edit Super Hero/Villain Success!</h1>
+                <h1>Edit Sighting Success!</h1>
             </div>
         </div>
         
         <div class="row m-4">
             <div class="col text-center border border-dark">
-                <p>Hero/Villain: <span th:text="${organization.name}"></span></p>
-                <p>Is Hero: <span th:text="${organization.isForHero}"></span></p>
+                <p>Name of Hero/Villain: <span th:text="${sighting.heroVillain.name}"></span></p>
+                <p>Latitude: <span th:text="${sighting.location.latitude}"></span></p>
+                <p>Longitude: <span th:text="${sighting.location.longitude}"></span></p>
             </div>
         </div>
         

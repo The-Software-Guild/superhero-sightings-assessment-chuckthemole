@@ -49,4 +49,7 @@ public interface SuperheroDao {
     List<Organization> getAllOrganizations();
     List<Power> getAllPowers();
     List<Sighting> getAllSightings();
+    
+    boolean addPower(int powerId, int heroVillainId);
+    List<Power> getHeroVillainPowers(int heroVillainId);
 }

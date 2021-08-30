@@ -49,4 +49,9 @@ public class Power {
     public boolean equals(Object o) {
         return this.id == ((Power) o).id;
     }
+    
+    @Override 
+    public String toString() {
+        return this.name;
+    }
 }

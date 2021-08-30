@@ -178,12 +178,18 @@ public class SuperheroDatabaseDao implements SuperheroDao {
 
     @Override
     public Power editPower(Power power, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        final String sql = "UPDATE power SET powerName = ?, powerDescription = ? WHERE power_id = ?";
+
+        jdbcTemplate.update(sql, power.getName(), power.getDescription(), id);
+        return power;
     }
 
     @Override
     public Sighting editSighting(Sighting sighting, int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        final String sql = "UPDATE sighting SET location_id = ?, heroVillain_id = ? WHERE sighting_id = ?";
+
+        jdbcTemplate.update(sql, sighting.getLocation().getId(), sighting.getHeroVillain().getId(), id);
+        return sighting;
     }
 
     @Override
@@ -356,6 +362,43 @@ public class SuperheroDatabaseDao implements SuperheroDao {
         });
         
         return sightings;
+    }
+
+    @Override
+    public boolean addPower(int powerId, int heroVillainId) {        
+        final String sql = "INSERT INTO heroVillainPower(heroVillain_id, power_id) VALUES(?, ?);";
+        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+
+        jdbcTemplate.update((Connection conn) -> {
+
+            PreparedStatement statement = conn.prepareStatement(
+                sql, 
+                Statement.RETURN_GENERATED_KEYS);
+            
+            statement.setInt(1, heroVillainId);
+            statement.setInt(2, powerId);
+            return statement;
+
+        }, keyHolder);
+
+        return true;
+        
+    }
+
+    @Override
+    public List<Power> getHeroVillainPowers(int heroVillainId) {
+        final String sql = "SELECT power_id FROM heroVillainPower WHERE heroVillain_id = ?";
+        List<Integer> power_ids = 
+                jdbcTemplate.queryForList(sql, Integer.class);
+        
+        List<Power> powers = new ArrayList<>();
+        power_ids.forEach(powerId -> {
+            String sqlPower = "SELECT * FROM power WHERE powerId = ?;";
+            Power power = jdbcTemplate.queryForObject(sqlPower, new PowerMapper());
+            powers.add(power);
+        });
+        
+        return powers;
     }
     
     private static final class HeroVillainMapper 

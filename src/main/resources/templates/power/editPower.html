@@ -17,19 +17,18 @@
     <div class="container">
         <div class="row m-4">
             <div class="col text-center border border-dark">
-                <h1>Edit Organization</h1>
+                <h1>Edit Power</h1>
             </div>
         </div>
         
         <div class="container">
-            <form action="#" th:action="@{/superhero/editOrganization/(id=${organization.id})}" method="post" th:object="${organization}">
+            <form action="#" th:action="@{/superhero/editPower/(id=${power.id})}" method="post" th:object="${power}">
                 <label>Name:</label>
                 <input type="text" th:field="*{name}" /><br/>
-
-                <label>Gender:</label>
-                <input type="radio" th:field="*{isForHero}" value="true" />Hero
-                <input type="radio" th:field="*{isForHero}" value="false" />Villain<br/>
-
+                
+                <label>Description:</label>
+                <input type="text" th:field="*{description}" /><br/>
+                
                 <button type="submit">Edit</button>    
             </form>
         </div>

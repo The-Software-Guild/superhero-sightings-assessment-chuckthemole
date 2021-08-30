@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class SuperheroController {
     private SuperheroView view;
     private SuperheroServiceLayer service;
+    private int heroId = 0;
 
     public SuperheroController(SuperheroServiceLayer service, SuperheroView view) {
         this.service = service;
@@ -43,6 +44,25 @@ public class SuperheroController {
     @GetMapping("/")
     public String index() {
         return "index";
+    }
+    
+    @GetMapping("/addPower/{id}")
+    private String addPower(@PathVariable int id, Model model) {
+        model.addAttribute("heroVillain", service.getHeroVillain(id));
+        heroId = id;
+        //model.addAttribute("powers", service.getAllPowers());
+        return "heroVillain/addPower";
+    }
+    
+    @PostMapping("addPower/{id}")
+    private String addPower(
+            @ModelAttribute("heroVillain") HeroVillain heroVillain,
+            @PathVariable int id,
+            Model model) {
+        service.addPower(id, heroId);
+        model.addAttribute("power", getPower(id));
+        model.addAttribute("heroVillain", getHeroVillain(heroId));
+        return "heroVillain/addPowerSuccess";
     }
     
     // @RequestBody Round round sending as JSON to hide url
@@ -232,7 +252,7 @@ public class SuperheroController {
         return "/organization/editOrganizationSuccess";
     }
     
-    @PostMapping("/createPower")
+    @PostMapping("/createPow")
     @ResponseStatus(HttpStatus.CREATED)
     private ResponseEntity<Power> createPower(String name, String description) {
         Power power = service.createPower(name, description);
@@ -243,7 +263,54 @@ public class SuperheroController {
         return ResponseEntity.ok(power);
     }
     
-    @PostMapping("/createSighting")
+    @GetMapping("/createPower")
+    private String createPower(Model model) {
+        model.addAttribute("power", new Power());
+        return "/power/createPower";
+    }
+    
+    @PostMapping("/createPower")
+    public String createPower(@ModelAttribute("power") Power power) {
+        service.createPower(power.getName(), power.getDescription());
+        return "/power/createPowerSuccess";
+    }
+    
+    @GetMapping("/deletePower")
+    private String deletePower(Model model) {
+        model.addAttribute("power", service.getAllPowers());
+        return "/power/deletePower";
+    }
+    
+    @PostMapping("/deletePower/{id}")
+    private String deletePower(@PathVariable int id, Model model) {
+        Power power = new Power();
+        power.setName(service.getPower(id).getName());
+        power.setDescription(service.getPower(id).getDescription());
+        model.addAttribute("power", power);
+        service.deletePower(id);
+        return "power/deletePowerSuccess";
+    }
+    
+    @GetMapping("/editPower")
+    private String editPower(Model model) {
+        model.addAttribute("powers", service.getAllPowers());
+        return "/power/editPowerList";
+    }
+    
+    @GetMapping("/editPower/{id}")
+    private String editPower(@PathVariable int id, Model model) {
+        model.addAttribute("power", service.getPower(id));
+        model.addAttribute("editPower", new Power());
+        return "/power/editPower";
+    }
+    
+    @PostMapping("/editPower")
+    private String editPower(@ModelAttribute("power") Power power) {
+        service.editPower(power);
+        return "/power/editPowerSuccess";
+    }
+    
+    @PostMapping("/createSight")
     @ResponseStatus(HttpStatus.CREATED)
     private ResponseEntity<Sighting> createSighting(int locationId, int superId) {
         Sighting sighting = service.createSighting(
@@ -254,6 +321,54 @@ public class SuperheroController {
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(sighting);
+    }
+    
+    @GetMapping("/createSighting")
+    private String createSighting(Model model) {
+        model.addAttribute("sighting", new Sighting());
+        return "/sighting/createSighting";
+    }
+    
+    @PostMapping("/createSighting")
+    public String createSighting(@ModelAttribute("sighting") Sighting sighting) {
+        service.createSighting(sighting.getLocation(), sighting.getHeroVillain());
+        return "/sighting/createSightingSuccess";
+    }
+    
+    @GetMapping("/deleteSighting")
+    private String deleteSighting(Model model) {
+        model.addAttribute("sighting", service.getAllSightings());
+        return "/sighting/deleteSighting";
+    }
+    
+    @PostMapping("/deleteSighting/{id}")
+    private String deleteSighting(@PathVariable int id, Model model) {
+        Sighting sighting = new Sighting();
+        sighting.setHeroVillain(service.getSighting(id).getHeroVillain());
+        sighting.setLocation(service.getSighting(id).getLocation());
+        sighting.setDate(service.getSighting(id).getDate());
+        model.addAttribute("sighting", sighting);
+        service.deleteSighting(id);
+        return "sighting/deleteSightingSuccess";
+    }
+    
+    @GetMapping("/editSighting")
+    private String editSighting(Model model) {
+        model.addAttribute("powers", service.getAllPowers());
+        return "/power/editPowerList";
+    }
+    
+    @GetMapping("/editSighting/{id}")
+    private String editSighting(@PathVariable int id, Model model) {
+        model.addAttribute("power", service.getPower(id));
+        model.addAttribute("editPower", new Power());
+        return "/power/editPower";
+    }
+    
+    @PostMapping("/editSighting")
+    private String editSighting(@ModelAttribute("sighting") Sighting sighting) {
+        service.editSighting(sighting);
+        return "/sighting/editSightingSuccess";
     }
     
     @GetMapping("/herosAndVillains")

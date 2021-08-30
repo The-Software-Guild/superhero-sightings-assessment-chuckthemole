@@ -16,6 +16,10 @@ $("#heroesVillains_btn").click(function(e) {
                 var superInfo = '<p>';
                 superInfo += 'Name: ' + heroVillain.name + '<br>';
                 superInfo += 'Is Hero: ' + heroVillain.isHero + '<br>';
+                superInfo += 'Powers: ' + '<br>';
+                $.each(heroVillain.powers, function(index, power) {
+                    superInfo += power.name + '<br>';
+                })
                 superInfo += '</p><hr>';
 
                 displayAllDiv.append(superInfo);

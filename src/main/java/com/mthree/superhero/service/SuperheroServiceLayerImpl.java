@@ -222,4 +222,15 @@ public class SuperheroServiceLayerImpl implements SuperheroServiceLayer {
     public Sighting editSighting(Sighting sighting) {
         return dao.editSighting(sighting, sighting.getId());
     }
+
+    @Override
+    public boolean addPower(int powerId, int heroVillainId) {
+        //heroVillainHash.get(heroVillainId).addPower(getPower(powerId));
+        return dao.addPower(powerId, heroVillainId);
+    }
+
+    @Override
+    public List<Power> getHeroVillainPowers(int id) {
+        return dao.getHeroVillainPowers(id);
+    }
 }
