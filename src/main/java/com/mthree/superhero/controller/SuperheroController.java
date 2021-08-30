@@ -106,11 +106,14 @@ public class SuperheroController {
     @GetMapping("/editHeroVillain/{id}")
     private String editHeroVillain(@PathVariable int id, Model model) {
         model.addAttribute("heroVillain", service.getHeroVillain(id));
+        model.addAttribute("editHeroVillain", new HeroVillain());
         return "/heroVillain/editHeroVillain";
     }
     
-    @PostMapping("/editHeroVillain")
-    private String editHeroVillain(@ModelAttribute("heroVillain") HeroVillain heroVillain) {
+    @PostMapping("/editHeroVillain/")
+    private String editHeroVillain(
+            @ModelAttribute("heroVillain") HeroVillain heroVillain) {
+        System.out.println("************************" + heroVillain.getId());
         service.editHeroVillain(heroVillain);
         return "/heroVillain/editHeroVillainSuccess";
     }

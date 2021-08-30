@@ -22,13 +22,14 @@
         </div>
         
         <div class="container">
-            <form action="#" th:action="@{/superhero/editHeroVillain}" method="post" th:object="${heroVillain}">
+            <form action="#" th:action="@{/superhero/editHeroVillain/}" method="post" th:object="${heroVillain}">
                 <label>Name:</label>
                 <input type="text" th:field="*{name}" /><br/>
 
                 <label>Gender:</label>
                 <input type="radio" th:field="*{isHero}" value="true" />Hero
                 <input type="radio" th:field="*{isHero}" value="false" />Villain<br/>
+                <input type="text" th:field="*{id}">ID</input>
 
                 <button type="submit">Edit</button>    
             </form>

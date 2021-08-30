@@ -155,18 +155,13 @@ public class SuperheroDatabaseDao implements SuperheroDao {
     @Override
     public HeroVillain editHeroVillain(HeroVillain heroVillain, int id) {
         final String sql = "UPDATE heroVillain SET "
-                + "name = ?, "
+                + "heroVillainName = ?, "
                 + "isHero = ?, "
-                + "WHERE id = ?;";
+                + "WHERE heroVillain_id = ?;";
 
-        if (jdbcTemplate.update(sql,
-                heroVillain.getName(),
-                heroVillain.getIsHero(),
-                heroVillain.getId()) > 0) {
-            return heroVillain;
-        }
+        jdbcTemplate.update(sql, heroVillain.getName(), heroVillain.getIsHero(), id);
+        return heroVillain;
         
-        return null;
     }
 
     @Override
