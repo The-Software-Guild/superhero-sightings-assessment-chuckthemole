@@ -401,6 +401,43 @@ public class SuperheroDatabaseDao implements SuperheroDao {
         return powers;
     }
     
+    @Override
+    public boolean addToOrganization(int organizationId, int heroVillainId) {        
+        final String sql = "INSERT INTO heroVillainOrganization(heroVillain_id, organization_id) VALUES(?, ?);";
+        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+
+        jdbcTemplate.update((Connection conn) -> {
+
+            PreparedStatement statement = conn.prepareStatement(
+                sql, 
+                Statement.RETURN_GENERATED_KEYS);
+            
+            statement.setInt(1, heroVillainId);
+            statement.setInt(2, organizationId);
+            return statement;
+
+        }, keyHolder);
+
+        return true;
+        
+    }
+
+    @Override
+    public List<HeroVillain> getHeroesVillainsInOrganization(int organizationId) {
+        final String sql = "SELECT heroVillain_id FROM heroVillainOrganization WHERE organization_id = ?";
+        List<Integer> heroVillain_ids = 
+                jdbcTemplate.queryForList(sql, Integer.class);
+        
+        List<HeroVillain> heroesVillains = new ArrayList<>();
+        heroVillain_ids.forEach(heroVillain_id -> {
+            String sqlHeroVillain = "SELECT * FROM heroVillain WHERE heroVillain_id = ?;";
+            HeroVillain heroVillain = jdbcTemplate.queryForObject(sqlHeroVillain, new HeroVillainMapper());
+            heroesVillains.add(heroVillain);
+        });
+        
+        return heroesVillains;
+    }
+    
     private static final class HeroVillainMapper 
             implements RowMapper<HeroVillain> {
         @Override

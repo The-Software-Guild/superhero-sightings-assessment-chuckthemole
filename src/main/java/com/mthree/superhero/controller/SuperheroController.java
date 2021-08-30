@@ -65,6 +65,25 @@ public class SuperheroController {
         return "heroVillain/addPowerSuccess";
     }
     
+    @GetMapping("/addOrganization/{id}")
+    private String addOrganization(@PathVariable int id, Model model) {
+        model.addAttribute("heroVillain", service.getHeroVillain(id));
+        heroId = id;
+        //model.addAttribute("powers", service.getAllPowers());
+        return "heroVillain/addOrganization";
+    }
+    
+    @PostMapping("addOrganization/{id}")
+    private String addOrganization(
+            @ModelAttribute("heroVillain") HeroVillain heroVillain,
+            @PathVariable int id,
+            Model model) {
+        service.addToOrganization(id, heroId);
+        model.addAttribute("organization", getOrganization(id));
+        model.addAttribute("heroVillain", getHeroVillain(heroId));
+        return "heroVillain/addOrganizationSuccess";
+    }
+    
     // @RequestBody Round round sending as JSON to hide url
     @PostMapping("/addHeroVillain")
     @ResponseStatus(HttpStatus.CREATED)

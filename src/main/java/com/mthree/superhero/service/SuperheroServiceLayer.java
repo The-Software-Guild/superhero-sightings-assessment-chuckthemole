@@ -52,4 +52,6 @@ public interface SuperheroServiceLayer {
     
     boolean addPower(int powerId, int heroVillainId);
     List<Power> getHeroVillainPowers(int heroVillainId);
+    public List<HeroVillain> getHeroesVillainsInOrganization(int id);
+    public boolean addToOrganization(int organizationId, int heroVillainId);
 }

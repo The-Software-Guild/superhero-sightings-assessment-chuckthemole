@@ -233,4 +233,14 @@ public class SuperheroServiceLayerImpl implements SuperheroServiceLayer {
     public List<Power> getHeroVillainPowers(int id) {
         return dao.getHeroVillainPowers(id);
     }
+
+    @Override
+    public List<HeroVillain> getHeroesVillainsInOrganization(int id) {
+        return dao.getAllHerosAndVillains();
+    }
+
+    @Override
+    public boolean addToOrganization(int organizationId, int heroVillainId) {
+        return dao.addToOrganization(organizationId, heroVillainId);
+    }
 }

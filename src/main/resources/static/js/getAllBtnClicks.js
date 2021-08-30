@@ -77,6 +77,10 @@ $("#organizations_btn").click(function(e) {
                 var organizationInfo = '<p>';
                 organizationInfo += 'Name: ' + organization.name + '<br>';
                 organizationInfo += 'Is For Hero: ' + organization.isForHero + '<br>';
+                organizationInfo += 'Heroes/Villains: ' + '<br>';
+                $.each(organization.herosAndVillains, function(index, heroVillain) {
+                    organizationInfo += heroVillain.name + '<br>';
+                })
                 organizationInfo += '</p><hr>';
 
                 displayAllDiv.append(organizationInfo);
