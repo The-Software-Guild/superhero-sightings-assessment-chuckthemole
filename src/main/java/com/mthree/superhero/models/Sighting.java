@@ -12,7 +12,7 @@ import java.time.LocalTime;
  *
  * @author Chuck
  */
-public class Sighting {
+public class Sighting implements Comparable<Sighting> {
     private int id;
     private Location location;
     private HeroVillain heroVillain;
@@ -63,6 +63,18 @@ public class Sighting {
     @Override
     public boolean equals(Object o) {
         return this.id == ((Sighting) o).id;
+    }
+    
+    @Override
+    public String toString() {
+        return "Name: " + heroVillain.getName() 
+                + "  Location: " + location.getLatitude() 
+                + ", " + location.getLongitude();
+    }
+
+    @Override
+    public int compareTo(Sighting o) {
+        return this.date.compareTo(o.getDate());
     }
     
 }

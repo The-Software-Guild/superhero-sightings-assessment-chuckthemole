@@ -138,6 +138,8 @@ $("#sightings_btn").click(function(e) {
                 sightingInfo += 'Sighting ID: ' + sighting.id + '<br>';
                 sightingInfo += 'Hero/Villain Name: ' + sighting.heroVillain.name + '<br>';
                 sightingInfo += 'Location ID: ' + sighting.location.id + '<br>';
+                sightingInfo += 'Latitude: ' + sighting.location.latitude + '<br>';
+                sightingInfo += 'Longitude: ' + sighting.location.longitude + '<br>';
                 sightingInfo += '</p><hr>';
 
                 displayAllDiv.append(sightingInfo);

@@ -12,6 +12,8 @@ import com.mthree.superhero.models.Power;
 import com.mthree.superhero.models.Sighting;
 import com.mthree.superhero.service.SuperheroServiceLayer;
 import com.mthree.superhero.ui.SuperheroView;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -133,8 +135,28 @@ public class SuperheroControllerRestAPI {
     }
     
     @GetMapping("/getSightings")
-    private List<Sighting> getSightings(Model model) {
+    private List<Sighting> getSightings() {
         return service.getAllSightings();
+    }
+    
+    @GetMapping("getRecentSightings")
+    private List<Sighting> getRecentSightings() {
+        List<Sighting> sightings = service.getAllSightings();
+        Collections.sort(sightings);
+        Collections.reverse(sightings);
+        
+        List<Sighting> topTen = new ArrayList<>();
+        if (sightings.size() > 10) {
+            for (int i = 0; i < 10; i++) {
+                topTen.add(sightings.get(i));
+            }
+        } else {
+            sightings.forEach(sighting -> {
+                topTen.add(sighting);
+            });
+        }
+        
+        return topTen;
     }
     
     @GetMapping("/heroVillain/{id}")

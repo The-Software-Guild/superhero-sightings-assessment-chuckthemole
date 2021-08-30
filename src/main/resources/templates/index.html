@@ -25,6 +25,27 @@
         <div class="row m-4 border border-dark">
             <p class="col">
                 
+                <a class="btn btn-primary m-3" data-toggle="collapse" href="#recentCollapse" role="button" aria-expanded="false" aria-controls="recentCollapse">
+                    Recent Sightings
+                </a>
+                View the 10 most recent sightings.
+            </p>
+        </div>
+        
+        <div class="collapse" id="recentCollapse">
+            <div class="card card-body">
+                
+                <div class="container">
+                    <div id="recentBanner"></div>
+                    <div id="recent"></div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="row m-4 border border-dark">
+            <p class="col">
+                
                 <a class="btn btn-primary m-3" data-toggle="collapse" href="#createCollapse" role="button" aria-expanded="false" aria-controls="createCollapse">
                     Create
                 </a>
@@ -256,6 +277,7 @@
     <script type="text/javascript" th:src="@{/js/addPowerHeroVillainList.js}"></script>
     <script type="text/javascript" th:src="@{/js/addHeroVillainToOrganizationList.js}"></script>
     <script type="text/javascript" th:src="@{/js/addSightingList.js}"></script>
+    <script type="text/javascript" th:src="@{/js/recentSightings.js}"></script>
   </body>
 </html>;
 

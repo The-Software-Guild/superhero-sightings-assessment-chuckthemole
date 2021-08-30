@@ -354,11 +354,11 @@ public class SuperheroDatabaseDao implements SuperheroDao {
         // set heros and villains for organization
         sightings.forEach(sighting -> {
             String sqlHeroVillain = "SELECT heroVillain_id FROM sighting WHERE sighting_id = ?;";
-            int heroVillainId = jdbcTemplate.queryForObject(sqlHeroVillain, Integer.class);
+            Integer heroVillainId = jdbcTemplate.queryForObject(sqlHeroVillain, Integer.class, sighting.getId());
             sighting.setHeroVillain(getHeroVillain(heroVillainId));
             
             String sqlLocation = "SELECT location_id FROM sighting WHERE sighting_id = ?;";
-            int locationId = jdbcTemplate.queryForObject(sqlLocation, Integer.class);
+            Integer locationId = jdbcTemplate.queryForObject(sqlLocation, Integer.class, sighting.getId());
             sighting.setLocation(getLocation(locationId));
         });
         
