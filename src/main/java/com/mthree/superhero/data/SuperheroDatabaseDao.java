@@ -195,25 +195,36 @@ public class SuperheroDatabaseDao implements SuperheroDao {
 
     @Override
     public boolean deleteHeroVillain(int id) {
-        // delete heroOrganization heroPower and sighting first
+        final String sqlSighting = "DELETE FROM sighting WHERE heroVillain_id = ?";
+        jdbcTemplate.update(sqlSighting, id);
+        final String sqlPower = "DELETE FROM heroVillainPower WHERE heroVillain_id = ?";
+        jdbcTemplate.update(sqlPower, id);
+        final String sqlOrganization = "DELETE FROM heroVillainOrganization WHERE heroVillain_id = ?";
+        jdbcTemplate.update(sqlOrganization, id);
         final String sql = "DELETE FROM heroVillain WHERE heroVillain_id = ?;";
         return jdbcTemplate.update(sql, id) > 0;
     }
 
     @Override
     public boolean deleteLocation(int id) {
+        final String sqlSighting = "DELETE FROM sighting WHERE location_id = ?";
+        jdbcTemplate.update(sqlSighting, id);
         final String sql = "DELETE FROM location WHERE location_id = ?;";
         return jdbcTemplate.update(sql, id) > 0;
     }
 
     @Override
     public boolean deleteOrganization(int id) {
+        final String sqlOrganization = "DELETE FROM heroVillainOrganization WHERE organization_id = ?";
+        jdbcTemplate.update(sqlOrganization, id);
         final String sql = "DELETE FROM organizationHeroVillain WHERE organization_id = ?;";
         return jdbcTemplate.update(sql, id) > 0;
     }
 
     @Override
     public boolean deletePower(int id) {
+        final String sqlPower = "DELETE FROM heroVillainPower WHERE power_id = ?";
+        jdbcTemplate.update(sqlPower, id);
         final String sql = "DELETE FROM power WHERE power_id = ?;";
         return jdbcTemplate.update(sql, id) > 0;
     }

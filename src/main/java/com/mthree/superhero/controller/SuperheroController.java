@@ -392,15 +392,15 @@ public class SuperheroController {
     
     @GetMapping("/editSighting")
     private String editSighting(Model model) {
-        model.addAttribute("powers", service.getAllPowers());
-        return "/power/editPowerList";
+        model.addAttribute("sightings", service.getAllSightings());
+        return "/sighting/editSightingList";
     }
     
     @GetMapping("/editSighting/{id}")
     private String editSighting(@PathVariable int id, Model model) {
-        model.addAttribute("power", service.getPower(id));
-        model.addAttribute("editPower", new Power());
-        return "/power/editPower";
+        model.addAttribute("sighting", service.getSighting(id));
+        model.addAttribute("editSighting", new Sighting());
+        return "/sighting/editSighting";
     }
     
     @PostMapping("/editSighting")
