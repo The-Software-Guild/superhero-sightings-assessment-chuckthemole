@@ -16,7 +16,7 @@ $(document).ready(function(e){
                 superInfo += 'Name: ' + sighting.heroVillain.name + '<br>';
                 superInfo += 'Latitude: ' + sighting.location.latitude + '<br>';
                 superInfo += 'Longitude: ' + sighting.location.longitude + '<br>';
-                superInfo += '<form method="GET" action="/superhero/editSighting/' + power.id + '" th:action="@{/superhero/editsighting/}" th:object="${sighting}">';
+                superInfo += '<form method="GET" action="/superhero/editSighting/' + sighting.id + '" th:action="@{/superhero/editsighting/}" th:object="${sighting}">';
                 superInfo += '<button type="submit" name="submit" value="value" class="btn btn-info">Edit</button><br></form>';
                 superInfo += '</p><hr>';
                 

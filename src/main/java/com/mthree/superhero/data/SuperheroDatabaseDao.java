@@ -290,15 +290,15 @@ public class SuperheroDatabaseDao implements SuperheroDao {
         final String sql = 
                 "SELECT * FROM sighting WHERE sighting_id = ?;";
         Sighting sighting = jdbcTemplate.queryForObject(sql, new SightingMapper(), id);
-        /*
+        
         String sqlHeroVillain = "SELECT heroVillain_id FROM sighting WHERE sighting_id = ?;";
-        int heroVillainId = jdbcTemplate.queryForObject(sqlHeroVillain, Integer.class);
+        int heroVillainId = jdbcTemplate.queryForObject(sqlHeroVillain, Integer.class, id);
         sighting.setHeroVillain(getHeroVillain(heroVillainId));
 
         String sqlLocation = "SELECT location_id FROM sighting WHERE sighting_id = ?;";
-        int locationId = jdbcTemplate.queryForObject(sqlLocation, Integer.class);
+        int locationId = jdbcTemplate.queryForObject(sqlLocation, Integer.class, id);
         sighting.setLocation(getLocation(locationId));
-        */
+        
         return sighting;
     }
 

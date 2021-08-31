@@ -35,6 +35,7 @@ public class SuperheroController {
     private SuperheroView view;
     private SuperheroServiceLayer service;
     private int heroId = 0;
+    private int sightingId = 0;
 
     public SuperheroController(SuperheroServiceLayer service, SuperheroView view) {
         this.service = service;
@@ -401,6 +402,36 @@ public class SuperheroController {
         model.addAttribute("sighting", service.getSighting(id));
         model.addAttribute("editSighting", new Sighting());
         return "/sighting/editSighting";
+    }
+    
+    @GetMapping("editSightingSuper/{id}")
+    private String editSightingSuper(@PathVariable int id, Model model) {
+        sightingId = id;
+        model.addAttribute("sighting", service.getSighting(id));
+        return "sighting/editSightingSuper";
+    }
+    
+    @PostMapping("/editSightingSuper/{id}")
+    private String editSightingSuper(@PathVariable int id) {
+        Sighting sighting = getSighting(sightingId);
+        sighting.setHeroVillain(getHeroVillain(id));
+        service.editSighting(sighting);
+        return "sighting/editSightingSuccess";
+    }
+    
+    @GetMapping("editSightingLocation/{id}")
+    private String editSightingLocation(@PathVariable int id, Model model) {
+        sightingId = id;
+        model.addAttribute("sighting", service.getSighting(id));
+        return "sighting/editSightingLocation";
+    }
+    
+    @PostMapping("/editSightingLocation/{id}")
+    private String editSightingLocation(@PathVariable int id) {
+        Sighting sighting = getSighting(sightingId);
+        sighting.setLocation(getLocation(id));
+        service.editSighting(sighting);
+        return "sighting/editSightingSuccess";
     }
     
     @PostMapping("/editSighting")
